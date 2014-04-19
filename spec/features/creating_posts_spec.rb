@@ -8,9 +8,9 @@ feature 'Creating posts' do
     click_link 'New Post'
     # find the text field called Title and fill it in with the text
     fill_in 'Title', with: 'My First Post'
-    # find the text field called Content and fill it in with the text    
+    # find the text field called Content and fill it in with the text
     fill_in 'Content', with: 'Lorem ipsum dolor sit amet.'
-    # find the text field called Author and fill it in with the text    
+    # find the text field called Author and fill it in with the text
     fill_in 'Author', with: 'Randy Savage'
     # find the button called Save and click it
     click_button 'Save'
@@ -25,7 +25,6 @@ feature 'Creating posts' do
   end
 
   scenario 'with invalid attributes' do
-    pending "Please Finish: Creating posts with valid attributes before starting"
     # visit the posts path in the browser
     visit posts_path
     # find a link titled New Post and click it
@@ -35,6 +34,6 @@ feature 'Creating posts' do
     # assert that we are still on the form
     expect(current_path).to eq new_post_path
     # assert that we are getting the error flash
-    expect(page).to have_content('.alert.alert-error')
+    expect(page).to have_css('.alert.alert-error')
   end
 end
