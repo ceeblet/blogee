@@ -19,3 +19,6 @@
 
 /config/database.yml
 .ruby-version
+
+public/uploads
+

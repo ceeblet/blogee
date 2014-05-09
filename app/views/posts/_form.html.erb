@@ -1,4 +1,4 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, html: {multipart: true } do |f| %>
 <div class="form-group">
   <%= f.label :title %>
   <%= f.text_field :title, class: "form-control" %>
@@ -6,6 +6,10 @@
 <div class="form-group">
   <%= f.label :content %>
   <%= f.text_area :content, rows: 20, class: "form-control" %>
+</div>
+<div class="form-group">
+  <%= f.label :asset, "File" %><br>
+  <%= f.file_field :asset, class: "form-control" %>
 </div>
 <div class="form-group">
   Author: <%= @post.user.username %>
