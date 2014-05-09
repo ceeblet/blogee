@@ -4,10 +4,12 @@ class CommentsController < ApplicationController
 
   def new
     @comment = @post.comments.build
+    #@comment = Comment.new
   end
 
   def create
     @comment = @post.comments.build(comment_params)
+    #@comment = Comment.new(post_params)
     if @comment.save
       flash[:notice] = "Comment has been saved."
       redirect_to @post
@@ -23,6 +25,10 @@ class CommentsController < ApplicationController
       redirect_to post_path(@post)
     else
       flash[:error] = "Comment has not been updated."
+    if @post.update(post_params)
+      redirect_to post_path(@post)
+    else
+      flash[:error] = "Failed to update post."
       redirect_to edit_post_path(@post)
     end
   end
@@ -30,6 +36,9 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     redirect_to @post, notice: "Comment has been deleted."
+    @post.destroy
+    flash[:success] = "Post deleted."
+    redirect_to posts_path
   end
 
   private
@@ -44,5 +53,12 @@ class CommentsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:post_id])    
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :content, :author)
   end
 end
