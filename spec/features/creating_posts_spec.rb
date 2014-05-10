@@ -83,4 +83,24 @@ feature 'Creating posts' do
       expect(page).to have_content("test.jpg")
     end 
   end
+  
+  scenario "Creating a post with tags" do
+    visit posts_path
+    click_link 'New Post'
+
+    fill_in "Username", with: @user.username
+    fill_in "Password", with: @user.password
+    click_button "Sign in"
+    click_link 'New Post'
+
+    fill_in 'Title', with: 'My First Post'
+    fill_in 'Content', with: 'Lorem ipsum dolor sit amet.'
+    fill_in "post_tag_names", with: "browser visual"
+    click_button "Save"
+
+    within("#tags") do
+      expect(page).to have_content("browser")
+      expect(page).to have_content("visual")
+    end
+  end
 end

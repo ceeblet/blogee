@@ -25,6 +25,9 @@
       </p>
     </div>
     <% end %>
+    <div id="tags">
+      <p><%= render @post.tags %></p>
+    </div>
     <div class="comments">
       <%= link_to 'Add Comment', new_post_comment_path(@post) %>
       <%- @post.comments.each do |comment| %>
